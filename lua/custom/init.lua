@@ -10,6 +10,8 @@ for _, plugin in pairs(enable_providers) do
   vim.cmd("runtime " .. plugin)
 end
 
+vim.cmd([[highlight DiagnosticError ctermfg=Cyan guifg=#802a4f gui=bold]])
+
 -- autosave when loose focus
 -- vim.api.nvim_create_autocmd("BufLeave", {
 --   pattern = {"*"},
