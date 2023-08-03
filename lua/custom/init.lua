@@ -20,3 +20,5 @@ vim.cmd([[highlight DiagnosticError ctermfg=Cyan guifg=#802a4f gui=bold]])
 --     vim.cmd("write")
 --   end
 -- })
+--
+-- image_preview nvtree

@@ -1,4 +1,12 @@
 local plugins = {
+  -- image_preview
+  {
+    'https://github.com/adelarsq/image_preview.nvim',
+    event = 'VeryLazy',
+    config = function()
+        require("image_preview").setup()
+    end
+  },
   -- neovim-qt
   {"equalsraf/neovim-qt"},
   -- {
