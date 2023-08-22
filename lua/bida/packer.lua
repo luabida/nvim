@@ -1,6 +1,40 @@
 return require('packer').startup(function(use)
 
     use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
+    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+        require('git-conflict').setup()
+    end}
+
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {
+                {
+                    mode = "n", -- NORMAL mode
+                    -- prefix: use "<leader>f" for example for mapping everything related to finding files
+                    -- the prefix is prepended to every mapping part of `mappings`
+                    prefix = "",
+                    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+                    silent = true, -- use `silent` when creating keymaps
+                    noremap = true, -- use `noremap` when creating keymaps
+                    nowait = false, -- use `nowait` when creating keymaps
+                    expr = false, -- use `expr` when creating keymaps
+                }
+            }
+        end
+    }
+
+    use 'nvim-tree/nvim-web-devicons'
+
+    use {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
@@ -14,13 +48,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
+    use "rebelot/kanagawa.nvim"
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
@@ -85,6 +113,7 @@ return require('packer').startup(function(use)
                             key = 'd',
                         },
                     },
+                    footer = {"bla"},
                 },
             }
         end,
