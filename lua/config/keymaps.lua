@@ -4,8 +4,8 @@ local silent = { silent = true, noremap = true }
 vim.keymap.set('n', '<c-n>', '<cmd>Neotree<CR>')
 
 -- Quit, close buffers, etc.
-vim.keymap.set('n', '<leader>q', '<cmd>qa<cr>', silent)
-vim.keymap.set('n', '<leader>d', '<cmd>BufDel<cr>', { silent = true, nowait = true, noremap = true })
+vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', silent)
+vim.keymap.set('n', '<leader>d', '<cmd>bufdel<cr>', { silent = true, nowait = true, noremap = true })
 
 -- Save buffer
 vim.keymap.set('i', '<c-s>', '<esc><cmd>w<cr>a', silent)
@@ -33,8 +33,9 @@ vim.keymap.set('n', '<c-k>', '<c-w>k', silent)
 vim.keymap.set('n', '<c-l>', '<c-w>l', silent)
 
 -- Tab movement
-vim.keymap.set('n', '<c-Left>', '<cmd>tabpre<cr>', silent)
-vim.keymap.set('n', '<c-Right>', '<cmd>tabnext<cr>', silent)
+vim.keymap.set('n', '<S-tab>', '<cmd>tabpre<cr>', silent)
+vim.keymap.set('n', '<tab>', '<cmd>tabnext<cr>', silent)
+vim.keymap.set('n', '<leader>q', '<cmd>tabclose<cr>', silent)
 
 -- Make relative line jumps store jumplist locations
 vim.keymap.set('n', 'k', function()
