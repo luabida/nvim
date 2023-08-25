@@ -37,6 +37,11 @@ require("lspconfig")["cssls"].setup({
 	capabilities = capabilities,
 })
 
+require("lspconfig")["yamlls"].setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
 require("lspconfig")["emmet_ls"].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
