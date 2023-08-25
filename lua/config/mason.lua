@@ -1,7 +1,9 @@
 require("mason").setup({
   ensure_installed = {
     "lua-language-server",
-    "pyright"
+    "pyright",
+    "ruff",
+    "black"
   },
 
   PATH = "skip",
@@ -27,4 +29,5 @@ require("mason").setup({
 
   max_concurrent_installers = 10,
 })
+
 require("mason-lspconfig").setup()

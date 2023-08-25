@@ -70,7 +70,7 @@ return {
       },
     },
   },
-  { 'Olical/vim-enmasse', cmd = 'EnMasse' },
+  { 'Olical/vim-enmasse',     cmd = 'EnMasse' },
   {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
@@ -111,7 +111,7 @@ return {
     -- event = 'User ActuallyEditing',
     lazy = false,
   },
-  { 'romainl/vim-cool', event = 'VeryLazy' },
+  { 'romainl/vim-cool',       event = 'VeryLazy' },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -193,6 +193,7 @@ return {
     end,
   },
   'nvim-tree/nvim-web-devicons',
+  -- mason
   {
     "williamboman/mason.nvim",
     init = function()
@@ -200,7 +201,6 @@ return {
     end,
     lazy = false,
   },
-  -- mason
   {
     'smjonas/inc-rename.nvim',
     opts = {},
@@ -208,6 +208,16 @@ return {
   },
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
+  -- TODO: DEPRECATED (used for formatting)
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = {"python"},
+    opts = function ()
+      return require "config.null-ls"
+    end,
+  },
+  --
+  'mfussenegger/nvim-lint',
   --
   {
     'folke/trouble.nvim',
@@ -347,9 +357,9 @@ return {
     lazy = false,
   },
   'barreiroleo/ltex_extra.nvim',
-  { 'igankevich/mesonic', lazy = false },
-  { 'Civitasv/cmake-tools.nvim', lazy = true, opts = { cmake_always_use_terminal = true } },
-  { 'PontusPersson/pddl.vim', lazy = false },
+  { 'igankevich/mesonic',           lazy = false },
+  { 'Civitasv/cmake-tools.nvim',    lazy = true, opts = { cmake_always_use_terminal = true } },
+  { 'PontusPersson/pddl.vim',       lazy = false },
   {
     'thibthib18/ros-nvim',
     dependencies = 'nvim-telescope/telescope.nvim',
@@ -408,17 +418,17 @@ return {
 
         if warnings > 0 then
           components[#components + 1] =
-            { (#components > 0 and ' ' or '') .. warning_icon .. ' ' .. warnings, 'DiagnosticWarning' }
+          { (#components > 0 and ' ' or '') .. warning_icon .. ' ' .. warnings, 'DiagnosticWarning' }
         end
 
         if hints > 0 then
           components[#components + 1] =
-            { (#components > 0 and ' ' or '') .. hint_icon .. ' ' .. hints, 'DiagnosticHint' }
+          { (#components > 0 and ' ' or '') .. hint_icon .. ' ' .. hints, 'DiagnosticHint' }
         end
 
         if info > 0 then
           components[#components + 1] =
-            { (#components > 0 and ' ' or '') .. info_icon .. ' ' .. info, 'DiagnosticInfo' }
+          { (#components > 0 and ' ' or '') .. info_icon .. ' ' .. info, 'DiagnosticInfo' }
         end
 
         return components
@@ -608,11 +618,11 @@ return {
                 { fg = '#222222', bg = '#e9e9e9', style = 'bold' },
                 { fg = '#e9e9e9', bg = '#222222', style = 'bold' }
               )
-            or line.sep(
-              '',
-              { fg = '#222222', bg = '#e9e9e9', style = 'bold' },
-              { fg = '#e9e9e9', bg = '#222222', style = 'bold' }
-            )
+              or line.sep(
+                '',
+                { fg = '#222222', bg = '#e9e9e9', style = 'bold' },
+                { fg = '#e9e9e9', bg = '#222222', style = 'bold' }
+              )
           local num_wins = #tabby_api.get_tab_wins(tab.id)
           local win_idx = 1
           return {

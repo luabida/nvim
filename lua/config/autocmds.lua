@@ -36,6 +36,12 @@ autocmd('BufReadPre', {
   once = true,
 })
 
+autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
 autocmd('BufReadPost', {
   group = misc_aucmds,
   once = true,
