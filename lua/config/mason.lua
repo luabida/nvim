@@ -1,10 +1,13 @@
 require("mason").setup({
   ensure_installed = {
-    "lua-language-server",
+    "lua_ls",
+    "rust_analyzer",
     "pyright",
     "ruff",
     "black"
   },
+
+  automatic_installation = true,
 
   PATH = "skip",
 
