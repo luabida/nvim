@@ -76,10 +76,19 @@ return {
     ft = 'qf',
   },
   {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+  {
     'echasnovski/mini.nvim',
     event = 'User ActuallyEditing',
     config = function()
-      require('mini.surround').setup { search_method = 'cover' }
       require('mini.align').setup { mappings = { start = '', start_with_preview = 'g=' } }
       require('mini.ai').setup { search_method = 'cover' }
       require('mini.bracketed').setup {}
@@ -208,15 +217,6 @@ return {
   },
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
-  -- TODO: DEPRECATED (used for formatting)
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
-    opts = function ()
-      return require "config.null-ls"
-    end,
-  },
-  --
   'mfussenegger/nvim-lint',
   --
   {
