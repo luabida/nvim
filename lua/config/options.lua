@@ -27,6 +27,7 @@ vim.opt.conceallevel = 2
 vim.opt.concealcursor = 'nc'
 vim.opt.previewheight = 5
 vim.opt.undofile = true
+vim.opt.undodir = '/home/bida/.config/nvim/.undo/'
 vim.opt.synmaxcol = 500
 vim.opt.display = 'msgsep'
 vim.opt.cursorline = true
