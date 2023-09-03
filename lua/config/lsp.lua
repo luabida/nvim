@@ -32,23 +32,23 @@ package.path = package.path .. ";" .. parent_dir .. "?.lua"
 local utils = require("utils")
 
 if utils.executable("pylsp") then
-	local conda_prefix = os.getenv("CONDA_PREFIX")
+  local conda_prefix = os.getenv("CONDA_PREFIX")
 
   local function isempty(s)
-		return s == nil or s == ""
+    return s == nil or s == ""
   end
 
   local function use_if_defined(val, fallback)
-		return val ~= nil and val or fallback
-	end
+    return val ~= nil and val or fallback
+  end
 
-	if not isempty(conda_prefix) then
-		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
-		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python")
-	else
-		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
-		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
-	end
+  if not isempty(conda_prefix) then
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
+  else
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+  end
 
   require("lspconfig").pylsp.setup {
     on_attach = on_attach,
