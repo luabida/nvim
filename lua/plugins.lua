@@ -85,6 +85,7 @@ return {
       })
     end
   },
+  'simnalamburt/vim-mundo',
   {
     'echasnovski/mini.nvim',
     event = 'User ActuallyEditing',
