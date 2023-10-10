@@ -53,3 +53,7 @@ vim.keymap.set('n', 'j', function()
 
   return 'j'
 end, { expr = true, silent = true })
+
+-- quickfix
+vim.keymap.set('n', '<leader><leader>f', '<cmd> lua vim.lsp.buf.code_action()<cr>', silent)
+
