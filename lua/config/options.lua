@@ -42,3 +42,5 @@ vim.opt.splitright = true
 vim.opt.timeoutlen = 400
 vim.opt.fillchars = [[vert:│,horiz:─,eob: ]]
 vim.opt.switchbuf = 'useopen,uselast'
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true

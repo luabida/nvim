@@ -1,4 +1,8 @@
 return {
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
+    event = 'VeryLazy'
+  },
   "rebelot/kanagawa.nvim",
   {
     'ojroques/nvim-bufdel',

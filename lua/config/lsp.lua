@@ -60,8 +60,15 @@ if utils.executable("pylsp") then
           autopep8 = { enabled = false },
           yapf = { enabled = false },
           -- linter options
-          pylint = { enabled = true, executable = "pylint" },
-          ruff = { enabled = false },
+          pylint = {
+            enabled = true,
+            executable = "pylint",
+            report_progress=false,
+          },
+          ruff = {
+            enabled = false,
+            report_progress=false,
+          };
           pyflakes = { enabled = false },
           pycodestyle = { enabled = false },
           -- type checker
@@ -70,8 +77,8 @@ if utils.executable("pylsp") then
             overrides = { "--python-executable", vim.g.python3_host_prog, true },
             report_progress = true,
             live_mode = false
+            -- auto-completion options
           },
-          -- auto-completion options
           jedi_completion = { fuzzy = true },
           -- import sorting
           isort = { enabled = true },
@@ -120,4 +127,14 @@ require("lspconfig")["bashls"].setup({
 require("lspconfig")["hls"].setup({
   on_attach = on_attach,
   capabilities = capabilities,
+})
+
+require("lspconfig")["rust_analyzer"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    checkOnSave = {
+      command = "clippy",
+    }
+  }
 })
