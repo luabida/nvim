@@ -1,6 +1,7 @@
 -- Autocommands
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
+
 autocmd('VimEnter', {
   group = augroup('start_screen', { clear = true }),
   once = true,
@@ -8,16 +9,22 @@ autocmd('VimEnter', {
     require('start').start()
   end,
 })
+
 local misc_aucmds = augroup('misc_aucmds', { clear = true })
+
 autocmd('BufWinEnter', { group = misc_aucmds, command = 'checktime' })
+
 autocmd('TextYankPost', {
   group = misc_aucmds,
   callback = function()
     vim.highlight.on_yank()
   end,
 })
+
 autocmd('FileType', { group = misc_aucmds, pattern = 'qf', command = 'set nobuflisted' })
+
 vim.cmd [[silent! autocmd! FileExplorer *]]
+
 autocmd('BufEnter', {
   pattern = '*',
   callback = function(args)
@@ -28,6 +35,7 @@ autocmd('BufEnter', {
     end
   end,
 })
+
 autocmd('BufReadPre', {
   group = misc_aucmds,
   callback = function()
@@ -61,3 +69,6 @@ autocmd('BufReadPost', {
     })
   end,
 })
+
+-- Format on save
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
