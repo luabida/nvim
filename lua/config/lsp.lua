@@ -10,12 +10,12 @@ local on_attach = function(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
-  buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)         --> jumps to the definition of the symbol under the cursor
-  buf_set_keymap("n", "H", ":lua vim.lsp.buf.hover()<CR>", opts)               --> information about the symbol under the cursos in a floating window
-  buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)     --> lists all the implementations for the symbol under the cursor in the quickfix window
-  buf_set_keymap("n", "<leader>ra", ":lua vim.lsp.util.rename()<CR>", opts)    --> renaname old_fname to new_fname
+  buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)          --> jumps to the definition of the symbol under the cursor
+  buf_set_keymap("n", "H", ":lua vim.lsp.buf.hover()<CR>", opts)                --> information about the symbol under the cursos in a floating window
+  buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)      --> lists all the implementations for the symbol under the cursor in the quickfix window
+  buf_set_keymap("n", "<leader>ra", ":lua vim.lsp.util.rename()<CR>", opts)     --> renaname old_fname to new_fname
   buf_set_keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts) --> selects a code action available at the current cursor position
-  buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)         --> lists all the references to the symbl under the cursor in the quickfix window
+  buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)          --> lists all the references to the symbl under the cursor in the quickfix window
   buf_set_keymap("n", "<leader>ld", ":lua vim.diagnostic.open_float()<CR>", opts)
   buf_set_keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
@@ -57,18 +57,18 @@ if utils.executable("pylsp") then
         plugins = {
           -- formatter options
           black = { enabled = true },
-          autopep8 = { enabled = false },
-          yapf = { enabled = false },
+          autopep8 = { enabled = true },
+          yapf = { enabled = true },
           -- linter options
           pylint = {
             enabled = true,
             executable = "pylint",
-            report_progress=false,
+            report_progress = false,
           },
           ruff = {
             enabled = false,
-            report_progress=false,
-          };
+            report_progress = false,
+          },
           pyflakes = { enabled = false },
           pycodestyle = { enabled = false },
           -- type checker
