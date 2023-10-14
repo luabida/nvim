@@ -94,6 +94,33 @@ else
   vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
+if utils.executable("rust-analyzer") then
+  local rust_analyzer_executable = "rust-analyzer"
+  require("lspconfig")["rust_analyzer"].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { rust_analyzer_executable },
+    settings = {
+      checkOnSave = {
+        command = "clippy",
+      },
+      ["rust-analyzer"] = {
+        assist = {
+          importMerge = true,
+        },
+        cargo = {
+          loadOutDirsFromCheck = true,
+        },
+        procMacro = {
+          enable = true,
+        },
+      },
+    }
+  })
+else
+  vim.notify("rust-analyzer not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
 require("lspconfig")["cssls"].setup({
   on_attach = on_attach,
   capabilities = capabilities,
@@ -129,12 +156,8 @@ require("lspconfig")["hls"].setup({
   capabilities = capabilities,
 })
 
-require("lspconfig")["rust_analyzer"].setup({
+require("lspconfig")["marksman"].setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  settings = {
-    checkOnSave = {
-      command = "clippy",
-    }
-  }
+  cmd = { "marksman", "server" },
 })
