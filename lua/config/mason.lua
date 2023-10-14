@@ -1,10 +1,10 @@
 require("mason").setup({
   ensure_installed = {
     "lua_ls",
-    "rust_analyzer",
+    "rust-analyzer",
     "pyright",
     "ruff",
-    "black"
+    "black",
   },
 
   automatic_installation = true,
