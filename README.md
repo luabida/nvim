@@ -2,7 +2,7 @@
 ### Conda deps
 - neovim 
 - pip:
- - 'python-lsp-server[all]'
+  - 'python-lsp-server[all]'
 
 ## [Rust]
 ### Conda deps
