@@ -377,7 +377,7 @@ return {
   'folke/neodev.nvim',
   {
     'NvChad/nvim-colorizer.lua',
-    ft = { 'css', 'javascript', 'vim', 'html', 'lua' },
+    ft = { 'css', 'javascript', 'vim', 'html', 'lua', 'htmldjango' },
     opts = {},
   },
   {
@@ -550,7 +550,7 @@ return {
           filter = {
             event = 'lsp',
             kind = 'progress',
-            find = 'null-l',
+            -- find = 'null-l',
           },
           opts = { skip = true, stop = true },
         },

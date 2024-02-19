@@ -79,7 +79,7 @@ if utils.executable("pylsp") then
             live_mode = false
             -- auto-completion options
           },
-          jedi_completion = { fuzzy = true },
+          jedi_completion = { enabled = true, fuzzy = true },
           -- import sorting
           isort = { enabled = true },
         },
@@ -160,4 +160,9 @@ require("lspconfig")["marksman"].setup({
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "marksman", "server" },
+})
+
+require("lspconfig")["dockerls"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
