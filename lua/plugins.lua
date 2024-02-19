@@ -189,8 +189,8 @@ return {
           require 'hover.providers.lsp'
         end,
       }
-      vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
-      vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
+      -- vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
+      -- vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
     end,
   },
   {
@@ -377,7 +377,7 @@ return {
   'folke/neodev.nvim',
   {
     'NvChad/nvim-colorizer.lua',
-    ft = { 'css', 'javascript', 'vim', 'html', 'lua' },
+    ft = { 'css', 'javascript', 'vim', 'html', 'lua', 'htmldjango' },
     opts = {},
   },
   {
@@ -550,7 +550,7 @@ return {
           filter = {
             event = 'lsp',
             kind = 'progress',
-            find = 'null-l',
+            -- find = 'null-l',
           },
           opts = { skip = true, stop = true },
         },
