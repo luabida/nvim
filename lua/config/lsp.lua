@@ -31,7 +31,71 @@ local parent_dir = "../"
 package.path = package.path .. ";" .. parent_dir .. "?.lua"
 local utils = require("utils")
 
-if utils.executable("pylsp") then
+-- if utils.executable("pylsp") then
+--   local conda_prefix = os.getenv("CONDA_PREFIX")
+
+--   local function isempty(s)
+--     return s == nil or s == ""
+--   end
+
+--   local function use_if_defined(val, fallback)
+--     return val ~= nil and val or fallback
+--   end
+
+--   if not isempty(conda_prefix) then
+--     vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+--     vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
+--   else
+--     vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+--     vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+--   end
+
+--   require("lspconfig").pylsp.setup {
+--     on_attach = on_attach,
+--     settings = {
+--       pylsp = {
+--         plugins = {
+--           -- formatter options
+--           black = { enabled = true },
+--           autopep8 = { enabled = true },
+--           yapf = { enabled = true },
+--           -- linter options
+--           pylint = {
+--             enabled = true,
+--             executable = "pylint",
+--             report_progress = false,
+--           },
+--           ruff = {
+--             enabled = true,
+--             report_progress = false,
+--           },
+--           pyflakes = { enabled = true },
+--           pycodestyle = { enabled = false },
+--           -- type checker
+--           pylsp_mypy = {
+--             enabled = true,
+--             overrides = { "--python-executable", vim.g.python3_host_prog, true },
+--             report_progress = true,
+--             live_mode = false
+--             -- auto-completion options
+--           },
+--           jedi_completion = { enabled = true, fuzzy = true },
+--           -- import sorting
+--           isort = { enabled = true },
+--         },
+--       },
+--     },
+--     flags = {
+--       debounce_text_changes = 200,
+--     },
+--     capabilities = capabilities,
+--   }
+-- else
+--   vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+-- end
+
+if require("lspconfig").pyright then
+  local pyright = require("lspconfig").pyright
   local conda_prefix = os.getenv("CONDA_PREFIX")
 
   local function isempty(s)
@@ -50,38 +114,15 @@ if utils.executable("pylsp") then
     vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
   end
 
-  require("lspconfig").pylsp.setup {
+  pyright.setup {
     on_attach = on_attach,
     settings = {
-      pylsp = {
-        plugins = {
-          -- formatter options
-          black = { enabled = true },
-          autopep8 = { enabled = true },
-          yapf = { enabled = true },
-          -- linter options
-          pylint = {
-            enabled = true,
-            executable = "pylint",
-            report_progress = false,
-          },
-          ruff = {
-            enabled = true,
-            report_progress = false,
-          },
-          pyflakes = { enabled = true },
-          pycodestyle = { enabled = false },
-          -- type checker
-          pylsp_mypy = {
-            enabled = true,
-            overrides = { "--python-executable", vim.g.python3_host_prog, true },
-            report_progress = true,
-            live_mode = false
-            -- auto-completion options
-          },
-          jedi_completion = { enabled = true, fuzzy = true },
-          -- import sorting
-          isort = { enabled = true },
+      python = {
+        pythonPath = vim.g.python3_host_prog,
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = "workspace",
         },
       },
     },
@@ -91,7 +132,7 @@ if utils.executable("pylsp") then
     capabilities = capabilities,
   }
 else
-  vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+  vim.notify("Pyright not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
 if utils.executable("rust-analyzer") then
