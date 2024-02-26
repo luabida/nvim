@@ -1,5 +1,20 @@
 require('nvim-treesitter.configs').setup {
   auto_install = true,
+  ensure_installed = {
+    "lua",
+    "vim",
+    "vimdoc",
+    "rust",
+    "python",
+    "javascript",
+    "html",
+    "scss",
+    "dockerfile",
+    "yaml",
+    "sql",
+    "bash",
+    "toml"
+  },
   highlight = {
     enable = true,
     max_file_lines = 5000,
@@ -13,7 +28,7 @@ require('nvim-treesitter.configs').setup {
   },
   indent = { enable = false },
   incremental_selection = {
-    enable = true,
+    enable = false,
     keymaps = {
       init_selection = '<cr>',
       node_incremental = '<tab>',
