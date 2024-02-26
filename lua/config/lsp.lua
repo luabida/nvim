@@ -1,3 +1,5 @@
+require("mason-lspconfig").setup {}
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -64,6 +66,11 @@ if utils.executable("pylsp") then
             enabled = false,
             executable = "pylint",
             report_progress = false,
+          },
+          pylint_django = {
+            enabled = true,
+            executable = "djlint",
+            overrides = { "--python-executable", vim.g.python3_host_prog, true },
           },
           ruff = {
             enabled = true,

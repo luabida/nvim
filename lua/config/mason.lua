@@ -5,11 +5,12 @@ require("mason").setup({
     "pyright",
     "ruff",
     "black",
+    "djlint"
   },
 
   automatic_installation = true,
 
-  PATH = "skip",
+  -- PATH = "skip",
 
   ui = {
     icons = {
@@ -33,4 +34,8 @@ require("mason").setup({
   max_concurrent_installers = 10,
 })
 
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+  }
+}
