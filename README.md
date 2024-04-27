@@ -1,21 +1,4 @@
-## [Python]
-### Conda deps
-- neovim 
-- pip:
-  - 'python-lsp-server[all]'
+# 💤 LazyVim
 
-```
-i neovim && pip install pyright 'python-lsp-server[all]'
-```
-```
-i neovim && pip install pyright 'python-lsp-server[all]' django-stubs
-```
-
-## [Rust]
-### Conda deps
-- neovim
-- rust-src
-
-```
-i neovim rust-src
-```
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
