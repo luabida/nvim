@@ -2,10 +2,10 @@ require("mason").setup({
   ensure_installed = {
     "lua_ls",
     "rust-analyzer",
-    "pyright",
     "ruff",
     "black",
     "djlint",
+    "jedi-language-server",
   },
 
   automatic_installation = true,

@@ -12,6 +12,7 @@ vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", silent)
 
 -- Quit, close buffers, etc.
 vim.keymap.set("n", "<leader>d", "<cmd>tabclose<cr>", silent)
+
 vim.keymap.set("n", "<leader>Q", "<cmd>qa<cr>", silent)
 vim.keymap.set("n", "<leader>q", function()
   local bd = require("mini.bufremove").delete
@@ -62,3 +63,9 @@ vim.keymap.set("n", "j", function()
 
   return "j"
 end, { expr = true, silent = true })
+
+-- Glance
+vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
+vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
+vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>")
+vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")

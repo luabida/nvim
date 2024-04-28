@@ -16,6 +16,67 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 end
 
+local function isempty(s)
+  return s == nil or s == ""
+end
+
+local function use_if_defined(val, fallback)
+  return val ~= nil and val or fallback
+end
+
+if utils.executable("jedi-language-server") then
+  local conda_prefix = os.getenv("CONDA_PREFIX")
+
+  if not isempty(conda_prefix) then
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
+  else
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+  end
+  require("lspconfig").jedi_language_server.setup({
+    on_attach = on_attach,
+    cmd = { vim.g.python_host_prog, "-m", "jedi_language_server" },
+    settings = {
+      jedi = {
+        autoImportModules = {},
+        completion = {
+          enabled = true,
+          fuzzy = true,
+        },
+        diagnostics = {
+          enabled = true,
+        },
+        jediSettings = {
+          autoImportModules = {},
+          completion = {
+            enabled = true,
+            fuzzy = true,
+          },
+          diagnostics = {
+            enabled = true,
+          },
+        },
+        plugins = {
+          pylint_django = {
+            enabled = true,
+            executable = "djlint",
+            overrides = { "--python-executable", vim.g.python3_host_prog, true },
+          },
+        },
+      },
+    },
+    flags = {
+      debounce_text_changes = 200,
+    },
+    capabilities = capabilities,
+  })
+else
+  if vim.api.nvim_buf_get_option(0, "filetype") == "python" then
+    vim.notify("jedi-language-server not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+  end
+end
+
 if utils.executable("rust-analyzer") then
   local rust_analyzer_executable = "rust-analyzer"
   require("lspconfig")["rust_analyzer"].setup({
