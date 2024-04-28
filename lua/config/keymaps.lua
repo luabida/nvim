@@ -33,6 +33,8 @@ end, { silent = true })
 vim.keymap.set("n", "<S-tab>", "<cmd>tabprevious<cr>", silent)
 vim.keymap.set("n", "<tab>", "<cmd>tabnext<cr>", silent)
 
+-- Move
+
 -- Window movement
 vim.keymap.set("n", "<c-h>", "<c-w>h", silent)
 vim.keymap.set("n", "<c-j>", "<c-w>j", silent)

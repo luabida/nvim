@@ -24,6 +24,68 @@ local function use_if_defined(val, fallback)
   return val ~= nil and val or fallback
 end
 
+if utils.executable("pylsp") then
+  local conda_prefix = os.getenv("CONDA_PREFIX")
+
+  if not isempty(conda_prefix) then
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
+  else
+    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+  end
+
+  require("lspconfig").pylsp.setup({
+    on_attach = on_attach,
+    settings = {
+      pylsp = {
+        plugins = {
+          -- formatter options
+          black = { enabled = true },
+          autopep8 = { enabled = true },
+          yapf = { enabled = true },
+          -- linter options
+          pylint = {
+            enabled = false,
+            executable = "pylint",
+            report_progress = false,
+          },
+          pylint_django = {
+            enabled = true,
+            executable = "djlint",
+            overrides = { "--python-executable", vim.g.python3_host_prog, true },
+          },
+          ruff = {
+            enabled = true,
+            report_progress = false,
+          },
+          pyflakes = { enabled = false },
+          pycodestyle = { enabled = false },
+          -- type checker
+          pylsp_mypy = {
+            enabled = true,
+            overrides = { "--python-executable", vim.g.python3_host_prog, true },
+            report_progress = true,
+            live_mode = false,
+            -- auto-completion options
+          },
+          jedi_completion = { enabled = false, fuzzy = true },
+          -- import sorting
+          isort = { enabled = true },
+        },
+      },
+    },
+    flags = {
+      debounce_text_changes = 200,
+    },
+    capabilities = capabilities,
+  })
+else
+  if vim.api.nvim_buf_get_option(0, "filetype") == "python" then
+    vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+  end
+end
+
 if utils.executable("jedi-language-server") then
   local conda_prefix = os.getenv("CONDA_PREFIX")
 
@@ -36,7 +98,6 @@ if utils.executable("jedi-language-server") then
   end
   require("lspconfig").jedi_language_server.setup({
     on_attach = on_attach,
-    cmd = { vim.g.python_host_prog, "-m", "jedi_language_server" },
     settings = {
       jedi = {
         autoImportModules = {},
@@ -55,13 +116,6 @@ if utils.executable("jedi-language-server") then
           },
           diagnostics = {
             enabled = true,
-          },
-        },
-        plugins = {
-          pylint_django = {
-            enabled = true,
-            executable = "djlint",
-            overrides = { "--python-executable", vim.g.python3_host_prog, true },
           },
         },
       },
