@@ -2,10 +2,10 @@ require("mason").setup({
   ensure_installed = {
     "lua_ls",
     "rust-analyzer",
-    "pyright",
     "ruff",
     "black",
-    "djlint"
+    "djlint",
+    "jedi-language-server",
   },
 
   automatic_installation = true,
@@ -33,9 +33,3 @@ require("mason").setup({
 
   max_concurrent_installers = 10,
 })
-
-require("mason-lspconfig").setup {
-  ensure_installed = {
-    "lua_ls",
-  }
-}
