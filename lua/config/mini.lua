@@ -1,7 +1,7 @@
 require("mini.move").setup({
   mappings = {
-    left = "<A-h>",
-    right = "<A-l>",
+    left = "",
+    right = "",
     down = "",
     up = "",
     -- Move current line in Normal mode
