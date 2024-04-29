@@ -46,8 +46,8 @@ if utils.executable("pylsp") then
           yapf = { enabled = true },
           -- linter options
           pylint = {
-            enabled = false,
-            executable = "pylint",
+            enabled = true,
+            executable = vim.g.python3_host_prog .. "/../pylint",
             report_progress = false,
           },
           pylint_django = {
@@ -69,7 +69,6 @@ if utils.executable("pylsp") then
             live_mode = false,
             -- auto-completion options
           },
-          jedi_completion = { enabled = false, fuzzy = true },
           -- import sorting
           isort = { enabled = true },
         },
