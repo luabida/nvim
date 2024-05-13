@@ -1,6 +1,6 @@
 local silent = { silent = true, noremap = true }
 
-vim.keymap.set("n", "<c-n>", "<cmd>Neotree<CR>")
+vim.keymap.set("n", "<c-n>", "<cmd>Neotree toggle<CR>")
 
 -- Yank to clipboard
 vim.keymap.set("n", "<c-y>", "<cmd>set opfunc=util#clipboard_yank<cr>g@", silent)
@@ -42,7 +42,7 @@ vim.keymap.set("n", "<c-k>", "<c-w>k", silent)
 vim.keymap.set("n", "<c-l>", "<c-w>l", silent)
 
 -- quickfix
-vim.keymap.set("n", "<leader><leader>f", "<cmd> lua vim.lsp.buf.code_action()<cr>", silent)
+vim.keymap.set("n", "<leader><space>f", "<cmd> lua vim.lsp.buf.code_action()<cr>", silent)
 
 -- rename
 vim.keymap.set("n", "<leader>r", function()
@@ -65,6 +65,9 @@ vim.keymap.set("n", "j", function()
 
   return "j"
 end, { expr = true, silent = true })
+
+-- Aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
 
 -- Glance
 vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
