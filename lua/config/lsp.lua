@@ -51,14 +51,14 @@ if utils.executable("pylsp") then
           -- formatter options
           black = { enabled = true },
           autopep8 = { enabled = true },
-          yapf = { enabled = true },
+          yapf = { enabled = false },
           -- linter options
           pylint = {
             enabled = true,
             executable = vim.g.python3_host_prog .. "/../pylint",
             report_progress = false,
             args = {
-              "--load-plugins=pylint_django",
+              "--load-plugins=pylint_celery",
             },
           },
           pylint_django = {
@@ -67,22 +67,23 @@ if utils.executable("pylsp") then
             overrides = { "--python-executable", vim.g.python3_host_prog, true },
           },
           ruff = {
-            enabled = false,
+            enabled = true,
             report_progress = false,
           },
           pyflakes = { enabled = false },
           pycodestyle = { enabled = false },
           -- type checker
           pylsp_mypy = {
-            enabled = true,
+            enabled = false,
             overrides = { "--python-executable", vim.g.python3_host_prog, true },
             report_progress = true,
             live_mode = false,
             -- auto-completion options
+            auto_completion = false,
           },
-          jedi_completion = { fuzzy = false },
+          jedi_completion = { enabled = false },
           -- import sorting
-          isort = { enabled = true },
+          isort = { enabled = false },
         },
       },
     },

@@ -1,3 +1,3 @@
 ```sh
-i neovim && pip install jedi-language-server 'python-lsp-server[all]' django-stubs pylint-django
+i neovim && pip install jedi-language-server 'python-lsp-server[all]' django-stubs pylint-django pylint-celery
 ```
