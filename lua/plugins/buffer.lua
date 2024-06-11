@@ -1,4 +1,5 @@
 return {
+  "norcalli/nvim-colorizer.lua",
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
