@@ -2,3 +2,4 @@
 require("config.lazy")
 
 vim.cmd("autocmd BufNewFile,BufRead *.py set filetype=python")
+vim.cmd("set foldmethod=manual")
