@@ -81,7 +81,7 @@ if utils.executable("pylsp") then
             -- auto-completion options
             auto_completion = false,
           },
-          jedi_completion = { enabled = false },
+          jedi_completion = { enabled = true },
           -- import sorting
           isort = { enabled = false },
         },
@@ -94,51 +94,6 @@ if utils.executable("pylsp") then
   })
 else
   vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
-end
-
-if utils.executable("jedi-language-server") then
-  local conda_prefix = os.getenv("CONDA_PREFIX")
-
-  if not isempty(conda_prefix) then
-    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
-    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
-  else
-    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
-    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
-  end
-  require("lspconfig").jedi_language_server.setup({
-    on_attach = on_attach,
-    settings = {
-      jedi = {
-        autoImportModules = {},
-        completion = {
-          enabled = true,
-          fuzzy = true,
-        },
-        diagnostics = {
-          enabled = true,
-        },
-        jediSettings = {
-          autoImportModules = {},
-          completion = {
-            enabled = true,
-            fuzzy = true,
-          },
-          diagnostics = {
-            enabled = true,
-          },
-        },
-      },
-    },
-    flags = {
-      debounce_text_changes = 200,
-    },
-    capabilities = capabilities,
-  })
-else
-  if vim.api.nvim_buf_get_option(0, "filetype") == "python" then
-    vim.notify("jedi-language-server not found!", vim.log.levels.WARN, { title = "Nvim-config" })
-  end
 end
 
 if utils.executable("rust-analyzer") then
@@ -218,12 +173,6 @@ require("lspconfig")["bashls"].setup({
 require("lspconfig")["hls"].setup({
   on_attach = on_attach,
   capabilities = capabilities,
-})
-
-require("lspconfig")["marksman"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "marksman", "server" },
 })
 
 require("lspconfig")["dockerls"].setup({
