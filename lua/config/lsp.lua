@@ -16,15 +16,7 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 end
 
-local function isempty(s)
-  return s == nil or s == ""
-end
-
-local function use_if_defined(val, fallback)
-  return val ~= nil and val or fallback
-end
-
-if utils.executable("pylsp") then
+local function setup_conda()
   local conda_prefix = os.getenv("CONDA_PREFIX")
 
   local function isempty(s)
@@ -35,13 +27,28 @@ if utils.executable("pylsp") then
     return val ~= nil and val or fallback
   end
 
-  if not isempty(conda_prefix) then
-    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
-    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
-  else
-    vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
-    vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+  if utils.executable("pylsp") then
+    if not isempty(conda_prefix) then
+      vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+      vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python3")
+    else
+      vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+      vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+    end
   end
+end
+
+if utils.executable("pyllsp") then
+  setup_conda()
+
+  require("lspconfig").pylsp.setup({
+    cmd = { "pyllsp" },
+    on_attach = on_attach,
+  })
+end
+
+if utils.executable("pylsp") then
+  setup_conda()
 
   require("lspconfig").pylsp.setup({
     on_attach = on_attach,
