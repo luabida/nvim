@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local configs = require("lspconfig.configs")
 local utils = require("utils")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -41,13 +42,20 @@ end
 if utils.executable("pyllsp") then
   setup_conda()
 
-  require("lspconfig").pylsp.setup({
-    cmd = { "pyllsp" },
+  if not configs.pyllsp then
+    configs.pyllsp = {
+      default_config = {
+        cmd = { "pyllsp" },
+        filetypes = { "python" },
+        root_dir = lspconfig.util.root_pattern(".git", "pyproject.toml"),
+      },
+    }
+  end
+
+  lspconfig.pyllsp.setup({
     on_attach = on_attach,
   })
-end
-
-if utils.executable("pylsp") then
+elseif utils.executable("pylsp") then
   setup_conda()
 
   require("lspconfig").pylsp.setup({
