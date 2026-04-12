@@ -2,9 +2,9 @@ return {
   "norcalli/nvim-colorizer.lua",
   {
     "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("config.treesitter")
-    end,
+    dependencies = { "neovim-treesitter/treesitter-parser-registry" },
+    lazy = false,
+    build = ":TSUpdate",
   },
   {
     "kylechui/nvim-surround",
@@ -35,7 +35,7 @@ return {
   },
   "tpope/vim-repeat",
   {
-    "echasnovski/mini.move",
+    "nvim-mini/mini.move",
     init = function()
       require("config.mini")
     end,

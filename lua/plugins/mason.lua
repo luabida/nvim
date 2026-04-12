@@ -1,12 +1,12 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     init = function()
       require("config.mason")
     end,
     lazy = false,
   },
-  "williamboman/mason-lspconfig.nvim",
+  "mason-org/mason-lspconfig.nvim",
   {
     "smjonas/inc-rename.nvim",
     opts = {},

@@ -1,26 +1,9 @@
 local lsp = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local on_attach = function() end
-
-for _, server in ipairs({
-  "cssls",
-  "yamlls",
-  "emmet_ls",
-  "tsserver",
-  "lua_ls",
-  "bashls",
-  "hls",
-  "dockerls",
-}) do
-  lsp[server].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
-end
 
 lsp.pylsp.setup({
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
   settings = {
     pylsp = {
       plugins = {
