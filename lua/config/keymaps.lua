@@ -23,10 +23,10 @@ vim.keymap.set("n", "<tab>", "<cmd>tabnext<cr>", silent)
 -- Move
 
 -- Window movement
-vim.keymap.set("n", "<c-h>", "<c-w>h", silent)
-vim.keymap.set("n", "<c-j>", "<c-w>j", silent)
-vim.keymap.set("n", "<c-k>", "<c-w>k", silent)
-vim.keymap.set("n", "<c-l>", "<c-w>l", silent)
+vim.keymap.set("n", "wl", "<c-w>l", silent)
+vim.keymap.set("n", "wh", "<c-w>h", silent)
+vim.keymap.set("n", "wj", "<c-w>j", silent)
+vim.keymap.set("n", "wk", "<c-w>k", silent)
 
 -- quickfix
 vim.keymap.set("n", "<leader><space>f", "<cmd> lua vim.lsp.buf.code_action()<cr>", silent)

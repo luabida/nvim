@@ -6,6 +6,7 @@ require("mason").setup({
     "black",
     "djlint",
     "jedi-language-server",
+    "pyright",
   },
 
   automatic_installation = true,

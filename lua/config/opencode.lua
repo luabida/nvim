@@ -1,6 +1,8 @@
 local M = {}
 
 function M.setup()
+  vim.api.nvim_set_hl(0, "OpencodeBorder", { link = "Normal", default = true })
+
   require("opencode").setup({
     preferred_picker = "snacks",
     preferred_completion = "blink",
@@ -11,6 +13,7 @@ function M.setup()
     - write concise code
     - avoid comments unless necessary
     - prefer functional style
+    - never use `rm`, only `trash-put`
     ]],
     keymap_prefix = "<leader>o",
     opencode_executable = "opencode",
