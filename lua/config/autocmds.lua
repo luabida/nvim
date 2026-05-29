@@ -24,13 +24,6 @@ autocmd("TextYankPost", {
   end,
 })
 
-autocmd("BufReadPre", {
-  group = misc_aucmds,
-  callback = function()
-    require("config.lsp")
-  end,
-  once = true,
-})
 
 autocmd("BufEnter", {
   pattern = "*",
@@ -39,6 +32,17 @@ autocmd("BufEnter", {
     if file_info and file_info.type == "directory" then
       require("neo-tree")
       return true
+    end
+  end,
+})
+
+autocmd("LspAttach", {
+  group = augroup("lsp_dedup", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "ruff" then
+      client.server_capabilities.definitionProvider = false
+      client.server_capabilities.referencesProvider = false
     end
   end,
 })

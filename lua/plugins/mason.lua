@@ -1,15 +1,13 @@
 return {
   {
     "mason-org/mason.nvim",
-    init = function()
-      require("config.mason")
-    end,
-    lazy = false,
+    opts = {
+      ensure_installed = {
+        "ruff",
+        "black",
+        "djlint",
+      },
+    },
   },
   "mason-org/mason-lspconfig.nvim",
-  {
-    "smjonas/inc-rename.nvim",
-    opts = {},
-    event = "BufReadPost",
-  },
 }
